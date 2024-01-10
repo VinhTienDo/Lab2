@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ladder
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -14,8 +15,8 @@ TagManager:
   - UI
   - back1
   - back2
-  - 
-  - 
+  - moon
+  - item
   - 
   - 
   - 
@@ -42,9 +43,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: back2
+    uniqueID: 1974027937
+    locked: 0
+  - name: moon
+    uniqueID: 4202476327
+    locked: 0
   - name: back1
     uniqueID: 116201865
     locked: 0
-  - name: back2
-    uniqueID: 1974027937
+  - name: item
+    uniqueID: 3960864083
     locked: 0
