@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Ladder
   - Platform
+  - Brick
+  - Brick2
+  - coin
+  - Mushroom
   layers:
   - Default
   - TransparentFX
