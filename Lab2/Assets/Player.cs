@@ -2,55 +2,99 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("va cham vao: " + collision.gameObject.tag);
+        Debug.Log("va cham vao: " + other.gameObject.tag);
 
-        if (collision.gameObject.tag == "coin")
+        if (other.gameObject.tag == "coin")
         {
-            Destroy(collision.gameObject);
+            Destroy(other.gameObject);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("va cham vao: " + collision.gameObject.tag);
+        Debug.Log("va cham vao: " + other.gameObject.tag);
+        if (other.gameObject.tag == "Brick")
+        {
+            isGrounded = true;
+            animator.SetBool("isGround", true);
+            animator.SetBool("isRun", false);
+        }
+        else if (other.gameObject.tag == "door")
+        {
+            SceneManager.LoadScene("Level1");
+        }
     }
 
+
     Rigidbody2D rigidbody2D;
-    // Start is called before the first frame update
+    Transform transform;
+    SpriteRenderer spriteRenderer;
+    bool isGrounded = false;
+    Animator animator;
+
+
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        /*transform = this.gameObject.GetComponent<Transform>();*/
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
-    int jumpCount = 1;
     float movePrefix = 3;
+    int JumpCount = 1;
 
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Key was pressed");
-            jumpCount++;
+            if (isGrounded)
+            {
+                rigidbody2D.AddForce(Vector2.up * movePrefix * 2, ForceMode2D.Impulse);
+                isGrounded = false;
 
-            rigidbody2D.AddForce(Vector2.up * movePrefix, ForceMode2D.Impulse);
+                animator.SetBool("isGround", false);
+                animator.SetBool("isRun", false);
+            }
+            
         }
-        else if(Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             rigidbody2D.AddForce(Vector2.left * movePrefix, ForceMode2D.Impulse);
+            /*transform.localScale = new Vector3(-1, 1, 1);*/
+            spriteRenderer.flipX = true;
+
+            animator.SetBool("isRun", true);
+
         }
-        else if(Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             rigidbody2D.AddForce(Vector2.right * movePrefix, ForceMode2D.Impulse);
+            /*transform.localScale = new Vector3(1, 1, 1);*/
+            spriteRenderer.flipX = false;
+
+            animator.SetBool("isRun", true);
         }
-        
-            
-        
     }
+    
+
+    private void setToIdle ()
+    {
+        StartCoroutine(wait(1f));
+
+        animator.SetBool("isRun", false );
+        animator.SetBool("isGround", true);
+    }
+
+    IEnumerator wait(float timeSeconds)
+    {
+        yield return new WaitForSeconds(timeSeconds);
+    }
+   
 }
