@@ -18,8 +18,8 @@ TagManager:
   - 
   - Water
   - UI
-  - back1
-  - back2
+  - backGround
+  - ground
   - moon
   - item
   - Player
