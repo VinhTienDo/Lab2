@@ -54,7 +54,7 @@ TagManager:
   - name: moon
     uniqueID: 4202476327
     locked: 0
-  - name: back2
+  - name: ground
     uniqueID: 1974027937
     locked: 0
   - name: item
@@ -65,4 +65,7 @@ TagManager:
     locked: 0
   - name: text
     uniqueID: 2903095367
+    locked: 0
+  - name: button
+    uniqueID: 1437254915
     locked: 0
