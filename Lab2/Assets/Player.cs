@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -20,6 +22,10 @@ public class Player : MonoBehaviour
     private bool isGrounded;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private float groundCheckDistance;
+
+    public Text Diem;
+    int score = 0;
+
     //Transform transform;
     //SpriteRenderer spriteRenderer;
     //bool isGrounded = false;
@@ -32,7 +38,9 @@ public class Player : MonoBehaviour
 
         if (other.gameObject.tag == "coin")
         {
+            score++;
             Destroy(other.gameObject);
+            Diem.text = "Score: " + score.ToString();
         }
     }
 
@@ -49,6 +57,7 @@ public class Player : MonoBehaviour
         {
             SceneManager.LoadScene("Level1");
         }
+        
     }
 
 
@@ -58,7 +67,7 @@ public class Player : MonoBehaviour
     void Start()
     {
 
-        
+        Diem = GameObject.Find("Diem").GetComponent<Text>();
 
         //rigidbody2D = GetComponent<Rigidbody2D>();
         ///*transform = this.gameObject.GetComponent<Transform>();*/
@@ -178,6 +187,8 @@ public class Player : MonoBehaviour
     {
         Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - groundCheckDistance));
     }
+
+    
 
 
     //private void setToIdle ()
