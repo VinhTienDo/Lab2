@@ -11,6 +11,7 @@ TagManager:
   - coin
   - Mushroom
   - door
+  - heart
   layers:
   - Default
   - TransparentFX

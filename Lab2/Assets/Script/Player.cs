@@ -24,7 +24,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float groundCheckDistance;
 
     public Text Diem;
+    public Text Mau;
     int score = 0;
+    int heart = 0;
 
     //Transform transform;
     //SpriteRenderer spriteRenderer;
@@ -42,6 +44,22 @@ public class Player : MonoBehaviour
             Destroy(other.gameObject);
             Diem.text = "Score: " + score.ToString();
         }
+        else if (other.gameObject.tag == "heart")
+        {
+            heart++;
+            Destroy(other.gameObject);
+            Mau.text = "x " + heart.ToString();
+            
+        }
+        else if (other.gameObject.tag == "Mushroom")
+        {
+            heart--;
+            Mau.text = "x " + heart.ToString();
+            if (heart <= 0)
+            {
+                Application.LoadLevel("Level1");
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -58,6 +76,7 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene("Level1");
         }
         
+        
     }
 
 
@@ -68,6 +87,7 @@ public class Player : MonoBehaviour
     {
 
         Diem = GameObject.Find("Diem").GetComponent<Text>();
+        Mau = GameObject.Find("Mau").GetComponent<Text>();
 
         //rigidbody2D = GetComponent<Rigidbody2D>();
         ///*transform = this.gameObject.GetComponent<Transform>();*/
