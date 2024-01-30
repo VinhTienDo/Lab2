@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public float jumpForce;
     public Animator anim;
     [SerializeField] private bool isRun;
+    
 
     private int facingDirection = 1;
     private bool facingRight = true;
@@ -28,10 +29,7 @@ public class Player : MonoBehaviour
     int score = 0;
     int heart = 0;
 
-    //Transform transform;
-    //SpriteRenderer spriteRenderer;
-    //bool isGrounded = false;
-    //Animator animator;
+
 
     private void OnTriggerEnter2D(Collider2D other)
     { 
@@ -62,14 +60,14 @@ public class Player : MonoBehaviour
         }
     }
 
+
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log("va cham vao: " + other.gameObject.tag);
-        if (other.gameObject.tag == "Brick")
+        if (other.gameObject.tag == "Mushroom")
         {
-            //isGrounded = true;
-            //animator.SetBool("isGround", true);
-            //animator.SetBool("isRun", false);
+            
         }
         else if (other.gameObject.tag == "door")
         {
@@ -89,14 +87,9 @@ public class Player : MonoBehaviour
         Diem = GameObject.Find("Diem").GetComponent<Text>();
         Mau = GameObject.Find("Mau").GetComponent<Text>();
 
-        //rigidbody2D = GetComponent<Rigidbody2D>();
-        ///*transform = this.gameObject.GetComponent<Transform>();*/
-        //spriteRenderer = GetComponent<SpriteRenderer>();
-        //animator = GetComponent<Animator>();
+
     }
 
-    //float movePrefix = 3;
-    //int JumpCount = 1;
 
     void Update()
     {
@@ -106,37 +99,6 @@ public class Player : MonoBehaviour
         AnimatorController();
         CollisionCheck();
 
-
-
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    if (isGrounded)
-        //    {
-        //        rigidbody2D.AddForce(Vector2.up * movePrefix * 2, ForceMode2D.Impulse);
-        //        isGrounded = false;
-
-        //        animator.SetBool("isGround", false);
-        //        animator.SetBool("isRun", false);
-        //    }
-
-        //}
-        //else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        //{
-        //    rigidbody2D.AddForce(Vector2.left * movePrefix, ForceMode2D.Impulse);
-        //    /*transform.localScale = new Vector3(-1, 1, 1);*/
-        //    spriteRenderer.flipX = true;
-
-        //    animator.SetBool("isRun", true);
-
-        //}
-        //else if (Input.GetKeyDown(KeyCode.RightArrow))
-        //{
-        //    rigidbody2D.AddForce(Vector2.right * movePrefix, ForceMode2D.Impulse);
-        //    /*transform.localScale = new Vector3(1, 1, 1);*/
-        //    spriteRenderer.flipX = false;
-
-        //    animator.SetBool("isRun", true);
-        //}
     }
 
     private void CollisionCheck()
@@ -208,20 +170,5 @@ public class Player : MonoBehaviour
         Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - groundCheckDistance));
     }
 
-    
-
-
-    //private void setToIdle ()
-    //{
-    //    StartCoroutine(wait(1f));
-
-    //    animator.SetBool("isRun", false );
-    //    animator.SetBool("isGround", true);
-    //}
-
-    //IEnumerator wait(float timeSeconds)
-    //{
-    //    yield return new WaitForSeconds(timeSeconds);
-    //}
 
 }

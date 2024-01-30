@@ -1663,6 +1663,7 @@ MonoBehaviour:
   jumpForce: 10
   anim: {fileID: 901896880}
   isRun: 0
+  panelEndGame: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128
